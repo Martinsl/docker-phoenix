@@ -1,8 +1,6 @@
----
-version: '2'
+version: '3.8'
 services:
   app:
-    image: nicbet/phoenix:1.5.1
     build:
       context: ..
       dockerfile: Dockerfile
@@ -23,4 +21,11 @@ services:
   db:
     image: postgres:10
     volumes:
-      - /var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_dev
+
+volumes:
+  dbdata:
+    driver: local
